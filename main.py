@@ -18,6 +18,16 @@ def add_test_case(test_plan, case_name):
     return test_plan
 
 
+def assign_tester(test_plan, case_name, tester_name):
+    for case in test_plan["test_cases"]:
+        if case["case_name"] == case_name:
+            case["tester"] = tester_name
+            print(f"Assigned '{tester_name}' to test case '{case_name}'")
+            return case
+    print(f"Test case '{case_name}' not found in plan '{test_plan['name']}'")
+    return None
+
+
 def main():
     print("Test Plan Manager started")
 
@@ -34,6 +44,9 @@ def main():
     # SCRUM-7: add test cases to a test plan
     add_test_case(test_plans[-1], "Verify email validation on signup form")
     add_test_case(test_plans[-1], "Verify duplicate email is rejected")
+
+    # SCRUM-8: assign tester to a test case
+    assign_tester(test_plans[-1], "Verify email validation on signup form", "Jan")
 
     show_test_plan_summary(test_plans)
 
